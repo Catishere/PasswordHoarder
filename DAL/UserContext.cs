@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using PasswordHoarder;
 using PasswordHoarder.Migrations;
+using PasswordHoarder.Models.DB;
 
 namespace PasswordHoarder.DAL
 {

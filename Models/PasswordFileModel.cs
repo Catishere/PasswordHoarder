@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PasswordHoarder.Browser.AddPassword;
+using PasswordHoarder.Models.UI;
 
 namespace PasswordHoarder.Models
 {

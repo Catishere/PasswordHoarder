@@ -3,12 +3,9 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using PasswordHoarder;
-using PasswordHoarder.Browser;
-using PasswordHoarder.Commands;
+using PasswordHoarder.Models.UI;
 using PasswordHoarder.Stores;
-using PasswordHoarder.Utils;
-using PasswordHoarder.ViewModels;
+using PasswordHoarder.ViewModels.Commands;
 
 namespace PasswordHoarder.ViewModels
 {
@@ -18,6 +15,7 @@ namespace PasswordHoarder.ViewModels
         public ICommand RefreshCommand { get; set; }
         public ICommand DeleteEntryCommand { get; set; }
         public ICommand NavigateAddCommand { get; }
+        public ICommand NavigateEditCommand { get; }
         public ObservableCollection<ContextAction> Actions { get; set; }
 
         public BrowserViewModel(NavigationStore navigationStore)
@@ -25,6 +23,7 @@ namespace PasswordHoarder.ViewModels
 
             PasswordList = new PasswordList();
             NavigateAddCommand = new NavigationCommand<AddPasswordViewModel>(navigationStore);
+            NavigateEditCommand = new NavigationCommand<EditPasswordViewModel>(navigationStore, _ => PasswordList.SelectedEntry != null);
 
             RefreshCommand = new GenericCommand<object>
             {
@@ -33,7 +32,8 @@ namespace PasswordHoarder.ViewModels
 
             DeleteEntryCommand = new GenericCommand<object>
             {
-                ExecuteDelegate = _ => PasswordList.RemoveSelected()
+                ExecuteDelegate = _ => PasswordList.RemoveSelected(),
+                CanExecuteDelegate = _ => PasswordList.SelectedEntry != null
             };
 
             var copyCommand = new GenericCommand<object>

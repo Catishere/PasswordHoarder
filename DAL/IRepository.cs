@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using PasswordHoarder;
+using PasswordHoarder.Models.DB;
 
 namespace PasswordHoarder.DAL
 {

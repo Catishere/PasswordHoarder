@@ -4,15 +4,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using PasswordHoarder.Annotations;
-using PasswordHoarder.Models;
 using PasswordHoarder.Utils;
 
-namespace PasswordHoarder.Browser
+namespace PasswordHoarder.Models.UI
 {
     internal class PasswordList : INotifyPropertyChanged
     {
         private string _match = "";
-        private IPasswordEntry _selectedEntry = null;
+        private IPasswordEntry _selectedEntry;
+        private bool _showPassword;
 
         public PasswordList()
         {
@@ -47,8 +47,20 @@ namespace PasswordHoarder.Browser
             {
                 _selectedEntry = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(EntryPasswordConceal));
             }
         }
+        public bool ShowPassword
+        {
+            get => _showPassword;
+            set
+            {
+                _showPassword = value && SelectedEntry != null;
+                OnPropertyChanged(nameof(EntryPasswordConceal));
+            }
+        }
+
+        public string EntryPasswordConceal => _showPassword ? SelectedEntry.Password : SelectedEntry == null ? "" : "*****";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -69,6 +81,7 @@ namespace PasswordHoarder.Browser
 
         public void RemoveSelected()
         {
+            if (SelectedEntry == null) return;
             Console.WriteLine($@"Deleted {SelectedEntry.Password}");
             Passwords.Remove(SelectedEntry);
             FileUtils.StorePasswords(Passwords);

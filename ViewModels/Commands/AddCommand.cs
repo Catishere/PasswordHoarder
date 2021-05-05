@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
-using PasswordHoarder.ViewModels;
 
-namespace PasswordHoarder.Browser.AddPassword
+namespace PasswordHoarder.ViewModels.Commands
 {
     public class AddCommand : ICommand
     {

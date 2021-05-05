@@ -4,6 +4,23 @@
              xmlns:local="clr-namespace:PasswordHoarder"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style x:Key="ShowButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/PasswordHoarder;component/Resources/eyeclosed.png"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/PasswordHoarder;component/Resources/eyeopened.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style x:Key="PlaceHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Template">
                 <Setter.Value>

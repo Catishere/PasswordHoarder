@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using PasswordHoarder.Browser.AddPassword;
 using PasswordHoarder.Models;
+using PasswordHoarder.Models.UI;
 
 namespace PasswordHoarder.Utils
 {

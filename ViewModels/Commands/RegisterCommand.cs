@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
-using PasswordHoarder.ViewModels;
 
-namespace PasswordHoarder.Login
+namespace PasswordHoarder.ViewModels.Commands
 {
     internal class RegisterCommand : ICommand
     {

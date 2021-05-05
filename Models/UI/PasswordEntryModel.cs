@@ -3,12 +3,11 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Security;
 using PasswordHoarder.Annotations;
-using PasswordHoarder.Models;
 using PasswordHoarder.Utils;
 
-namespace PasswordHoarder.Browser.AddPassword
+namespace PasswordHoarder.Models.UI
 {
-    public class PasswordEntryModel : IPasswordEntry, INotifyPropertyChanged
+    public class PasswordEntryModel : IPasswordEntry, INotifyPropertyChanged, ICopyEntry
     {
 #nullable enable
         private int _id;
@@ -139,6 +138,16 @@ namespace PasswordHoarder.Browser.AddPassword
         public int CompareTo(object other)
         {
             return string.Compare(Title, ((IPasswordEntry)other).Title, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public void Copy(IPasswordEntry other)
+        {
+            Title = other.Title;
+            Username = other.Username;
+            Password = other.Password;
+            Url = other.Url;
+            ExpireDate = other.ExpireDate;
+            Notes = other.Notes;
         }
     }
 }

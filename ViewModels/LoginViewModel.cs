@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PasswordHoarder.DAL;
-using PasswordHoarder.Login;
+using PasswordHoarder.Models;
+using PasswordHoarder.Models.DB;
+using PasswordHoarder.Models.UI;
 using PasswordHoarder.Stores;
+using PasswordHoarder.ViewModels.Commands;
 using PasswordHoarder.Views;
 
 namespace PasswordHoarder.ViewModels
@@ -20,7 +23,7 @@ namespace PasswordHoarder.ViewModels
         private NavigationStore _navigationStore;
         public ICommand LoginCommand { get; private set; }
         public ICommand RegisterCommand { get; private set; }
-        public Login.Login Login { get; set; }
+        public Login Login { get; set; }
         public bool CanLogin
         {
             get
@@ -36,7 +39,7 @@ namespace PasswordHoarder.ViewModels
             _navigationStore = navigationStore;
             _userRepository = new UserRepository(new UserContext());
             _userService = new UserService(_userRepository);
-            Login = new Login.Login();
+            Login = new Login();
             LoginCommand = new LoginCommand(this);
             RegisterCommand = new RegisterCommand(this);
         }

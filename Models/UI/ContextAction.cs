@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using PasswordHoarder.Annotations;
 
-namespace PasswordHoarder.Browser
+namespace PasswordHoarder.Models.UI
 {
     class ContextAction : INotifyPropertyChanged
     {

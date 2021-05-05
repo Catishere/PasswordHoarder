@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using PasswordHoarder.Annotations;
 
-namespace PasswordHoarder.Login
+namespace PasswordHoarder.Models.UI
 {
     public class Login : INotifyPropertyChanged
     {
