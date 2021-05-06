@@ -9,6 +9,5 @@ namespace PasswordHoarder.ViewModels
 {
     public interface IViewModel
     {
-        IViewModel CurrentViewModel { get; }
     }
 }

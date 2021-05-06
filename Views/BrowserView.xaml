@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PasswordHoarder.Views"
+             xmlns:ui="clr-namespace:PasswordHoarder.Models.UI"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="800" MinWidth="550" MinHeight="550">
 
@@ -26,8 +27,12 @@
             <ListView.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Actions}">
                     <ContextMenu.ItemTemplate >
-                        <DataTemplate DataType="passwordBrowser:ContextAction">
-                            <MenuItem Header="{Binding Name}" Command="{Binding Action}"></MenuItem>
+                        <DataTemplate DataType="ui:ContextAction">
+                            <MenuItem Header="{Binding Name}" Command="{Binding Action}">
+                                <MenuItem.Icon>
+                                    <Image Source="{Binding Icon}"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </DataTemplate>
                     </ContextMenu.ItemTemplate>
                 </ContextMenu>
@@ -35,10 +40,10 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Exp." DisplayMemberBinding="{Binding ExpireDate}" Width="50" />
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="100" />
-                    <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Username}" Width="100" />
-                    <GridViewColumn Header="URL" DisplayMemberBinding="{Binding Url}" Width="100" />
-                    <GridViewColumn Header="Notes" DisplayMemberBinding="{Binding Notes}" Width="100" />
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="150" />
+                    <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Username}" Width="150" />
+                    <GridViewColumn Header="URL" DisplayMemberBinding="{Binding Url}" Width="150" />
+                    <GridViewColumn Header="Notes" DisplayMemberBinding="{Binding Notes}" Width="150" />
                     <GridViewColumn Header="Modified" DisplayMemberBinding="{Binding Modified}" Width="100" />
                 </GridView>
             </ListView.View>
@@ -53,17 +58,21 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding NavigateEditCommand}" CommandParameter="{Binding PasswordList.SelectedEntry}" x:Name="EditButton" Margin="0" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" BorderBrush="{x:Null}" Grid.Column="1" Background="{x:Null}">
-                <Image Source="/PasswordHoarder;component/Resources/edit.png"/>
+            <Button Command="{Binding NavigateEditCommand}" CommandParameter="{Binding PasswordList.SelectedEntry}" x:Name="EditButton" Margin="0" FontSize="18" BorderBrush="{x:Null}" Grid.Column="1" Background="{x:Null}">
+                <Image Source="/PasswordHoarder;component/Resources/edit.png" Margin="0,5"/>
             </Button>
-            <Button  Command="{Binding DeleteEntryCommand}" x:Name="RemoveButton" Margin="0" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" BorderBrush="{x:Null}" Background="{x:Null}">
-                <Image Source="/PasswordHoarder;component/Resources/remove.png"/>
+            <Button  Command="{Binding DeleteEntryCommand}" x:Name="RemoveButton" Margin="0" Grid.Column="2" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Image Source="/PasswordHoarder;component/Resources/remove.png" Margin="0,5"/>
             </Button>
-            <Button Command="{Binding RefreshCommand}" Content="Refresh" Margin="25,10" Grid.Column="3"/>
-            <Button Content="Button" Margin="25,10" Grid.Column="4"/>
+            <Button Command="{Binding RefreshCommand}" Margin="0" Grid.Column="3" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Image Source="/PasswordHoarder;component/Resources/reload.png" Margin="0,5"/>
+            </Button>
+            <Button Command="{Binding NavigateGeneratePasswordCommand}" Margin="0" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Image Source="/PasswordHoarder;component/Resources/dice.png" Margin="0,5"/>
+            </Button>
             <Button Content="Button" Margin="25,10" Grid.Column="5"/>
-            <Button Command="{Binding NavigateAddCommand}" Grid.Column="0" x:Name="AddButton" Margin="0" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" BorderBrush="{x:Null}" Background="{x:Null}">
-                <Image Source="/PasswordHoarder;component/Resources/add.png"/>
+            <Button Command="{Binding NavigateAddCommand}" Grid.Column="0" x:Name="AddButton" Margin="0" FontSize="18" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Image Source="/PasswordHoarder;component/Resources/add.png" Margin="0,5"/>
             </Button>
         </Grid>
         <GroupBox Header="Record" Margin="10" Grid.Row="4">
@@ -84,9 +93,9 @@
                        Grid.Column="0" FontWeight="Bold"/>
                 <Label Content="Notes:" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Grid.Row="2"
                        Grid.Column="0" FontWeight="Bold"/>
-                <TextBlock Text="{Binding PasswordList.SelectedEntry.Username}" Grid.Row="0" Grid.Column="1" Margin="10,10,0,6" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding PasswordList.SelectedEntry.Username}" Grid.Row="0" Grid.Column="1" Margin="10,10,0,6" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <TextBlock Text="{Binding PasswordList.SelectedEntry.Notes}" Grid.Column="1" Margin="10,5,5,5" TextWrapping="Wrap" Grid.Row="2"/>
-                <TextBlock Text="{Binding PasswordList.EntryPasswordConceal}" Grid.Column="1" HorizontalAlignment="Left" Margin="40,7,0,6" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1"/>
+                <TextBlock Text="{Binding PasswordList.EntryPasswordConceal}" Grid.Column="1" HorizontalAlignment="Left" Margin="40,7,0,6" VerticalAlignment="Center" Grid.Row="1"/>
                 <Label Content="URL:" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Center" FontWeight="Bold"
                        Grid.Row="0" Grid.Column="2"/>
                 <TextBlock Text="{Binding PasswordList.SelectedEntry.Url}" Grid.Row="0" Grid.Column="3" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>

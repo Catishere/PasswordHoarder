@@ -11,13 +11,15 @@ namespace PasswordHoarder.Utils
 
         public enum SymbolType
         {
-            Alphabet,
+            Upper,
+            Lower,
             Number,
             Special,
         }
 
         public static readonly string[] SymbolArray = {
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+            "abcdefghijklmnopqrstuvwxyz",
             "0123456789",
             "!@#$%^&*()_+=-,./;:'\"|{}[]~`"
         };

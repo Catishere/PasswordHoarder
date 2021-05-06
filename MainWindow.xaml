@@ -22,6 +22,9 @@
             <DataTemplate DataType="{x:Type viewmodels:BrowserViewModel}">
                 <views:BrowserView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:GeneratePasswordViewModel}">
+                <views:GeneratePasswordView/>
+            </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>
 </Window>

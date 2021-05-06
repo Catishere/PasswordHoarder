@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security;
 using System.Text;
 
@@ -13,7 +14,7 @@ namespace PasswordHoarder.Utils
 
         public static string GeneratePassword(Symbols.SymbolType[] types, int size)
         {
-            if (size <= 0) return string.Empty;
+            if (size <= 0 || !types.Any()) return string.Empty;
 
             var password = new char[size];
             var random = new Random();

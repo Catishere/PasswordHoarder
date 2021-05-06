@@ -33,8 +33,7 @@ namespace PasswordHoarder.ViewModels
         {
             var list = FileUtils.GetPasswords().ToList();
             int newId = 0;
-            if (list.Count > 0)
-                newId = list.Max((e) => e.Id);
+            newId = list.Any() ? list.Max((e) => e.Id) : 1;
             PasswordEntryModel.Modified = DateTime.Now;
             PasswordEntryModel.Id = newId + 1;
             Console.WriteLine(PasswordEntryModel.Id);
@@ -42,7 +41,5 @@ namespace PasswordHoarder.ViewModels
             FileUtils.StorePasswords(list);
             NavigateBackCommand.Execute(null);
         }
-
-        public IViewModel CurrentViewModel { get; }
     }
 }

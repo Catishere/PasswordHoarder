@@ -10,13 +10,13 @@ namespace PasswordHoarder.Models.UI
     {
         public string Name { get; set; }
         public ICommand Action { get; set; }
-        public Brush Icon { get; set; }
+        public string Icon { get; set; }
 
         public ContextAction()
         {
         }
 
-        public ContextAction(string name, ICommand action, Brush icon)
+        public ContextAction(string name, ICommand action, string icon)
         {
             Name = name;
             Action = action;

@@ -142,6 +142,7 @@ namespace PasswordHoarder.Models.UI
 
         public void Copy(IPasswordEntry other)
         {
+            Id = other.Id;
             Title = other.Title;
             Username = other.Username;
             Password = other.Password;

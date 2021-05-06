@@ -43,6 +43,5 @@ namespace PasswordHoarder.ViewModels
             NavigateBackCommand.Execute(null);
         }
 
-        public IViewModel CurrentViewModel { get; }
     }
 }

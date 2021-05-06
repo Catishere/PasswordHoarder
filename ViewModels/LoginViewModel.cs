@@ -66,6 +66,5 @@ namespace PasswordHoarder.ViewModels
             _userService.Register(Login.Username, Login.SecurePassword);
         }
 
-        public IViewModel CurrentViewModel { get; }
     }
 }

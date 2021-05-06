@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using PasswordHoarder.Models.UI;
 using PasswordHoarder.Stores;
 using PasswordHoarder.ViewModels.Commands;
@@ -16,6 +17,7 @@ namespace PasswordHoarder.ViewModels
         public ICommand DeleteEntryCommand { get; set; }
         public ICommand NavigateAddCommand { get; }
         public ICommand NavigateEditCommand { get; }
+        public ICommand NavigateGeneratePasswordCommand { get; }
         public ObservableCollection<ContextAction> Actions { get; set; }
 
         public BrowserViewModel(NavigationStore navigationStore)
@@ -24,6 +26,7 @@ namespace PasswordHoarder.ViewModels
             PasswordList = new PasswordList();
             NavigateAddCommand = new NavigationCommand<AddPasswordViewModel>(navigationStore);
             NavigateEditCommand = new NavigationCommand<EditPasswordViewModel>(navigationStore, _ => PasswordList.SelectedEntry != null);
+            NavigateGeneratePasswordCommand = new NavigationCommand<GeneratePasswordViewModel>(navigationStore);
 
             RefreshCommand = new GenericCommand<object>
             {
@@ -48,11 +51,10 @@ namespace PasswordHoarder.ViewModels
 
             Actions = new ObservableCollection<ContextAction>
             {
-                new ("Copy Password", copyCommand, Brushes.Tomato),
-                new ("Show Password", showCommand, Brushes.Blue)
+                new ("Copy Password", copyCommand, @"/Resources/clipboard.png"),
+                new ("Show Password", showCommand, @"/Resources/clipboard.png")
             };
         }
 
-        public IViewModel CurrentViewModel { get; }
     }
 }
