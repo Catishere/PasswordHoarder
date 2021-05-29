@@ -8,23 +8,39 @@
         xmlns:views="clr-namespace:PasswordHoarder.Views"
         mc:Ignorable="d"
         Title="Password Hoarder" Height="600" Width="750" MinWidth="600" MinHeight="600">
-    <ContentControl Content="{Binding CurrentViewModel}">
-        <ContentControl.Resources>
-            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                <views:LoginView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:AddPasswordViewModel}">
-                <views:AddPasswordView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:EditPasswordViewModel}">
-                <views:EditPasswordView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:BrowserViewModel}">
-                <views:BrowserView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:GeneratePasswordViewModel}">
-                <views:GeneratePasswordView/>
-            </DataTemplate>
-        </ContentControl.Resources>
-    </ContentControl>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" ItemsSource="{Binding MenuItems}" Height="20">
+            <Menu.ItemContainerStyle>
+                <Style TargetType="{x:Type MenuItem}">
+                    <Setter Property="Command" Value="{Binding Command}" />
+                </Style>
+            </Menu.ItemContainerStyle>
+            <Menu.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type viewmodels:MenuItemViewModel}" ItemsSource="{Binding Path=SubItems}">
+                    <TextBlock Text="{Binding Header}"/>
+                </HierarchicalDataTemplate>
+            </Menu.ItemTemplate>
+        </Menu>
+        <Grid>
+            <ContentControl Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                        <views:LoginView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:AddPasswordViewModel}">
+                        <views:AddPasswordView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:EditPasswordViewModel}">
+                        <views:EditPasswordView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:BrowserViewModel}">
+                        <views:BrowserView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:GeneratePasswordViewModel}">
+                        <views:GeneratePasswordView/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
+    </DockPanel>
 </Window>

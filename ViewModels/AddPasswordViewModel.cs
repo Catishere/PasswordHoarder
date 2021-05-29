@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using PasswordHoarder.Models;
@@ -41,5 +42,7 @@ namespace PasswordHoarder.ViewModels
             FileUtils.StorePasswords(list);
             NavigateBackCommand.Execute(null);
         }
+
+        public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }
     }
 }

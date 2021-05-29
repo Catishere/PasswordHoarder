@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using PasswordHoarder.ViewModels.Commands;
 using PasswordHoarder.DAL;
 using PasswordHoarder.Models;
 using PasswordHoarder.Models.DB;
 using PasswordHoarder.Models.UI;
 using PasswordHoarder.Stores;
-using PasswordHoarder.ViewModels.Commands;
 using PasswordHoarder.Views;
 
 namespace PasswordHoarder.ViewModels
@@ -42,6 +43,29 @@ namespace PasswordHoarder.ViewModels
             Login = new Login();
             LoginCommand = new LoginCommand(this);
             RegisterCommand = new RegisterCommand(this);
+
+            MenuItems = new ObservableCollection<MenuItemViewModel>
+            {
+                new()
+                {
+                    Header = "Database",
+                    SubItems = new ObservableCollection<MenuItemViewModel>
+                    {
+                        new() { Header = "Import" },
+                        new() { Header = "Export" },
+                        new() { Header = "Quit" }
+                    }
+                },
+                new()
+                {
+                    Header = "Help",
+                    SubItems = new ObservableCollection<MenuItemViewModel>
+                    {
+                        new() { Header = "User Guide" },
+                        new() { Header = "About" }
+                    }
+                }
+            };
         }
 
         public void ExecuteLogin()
@@ -66,5 +90,6 @@ namespace PasswordHoarder.ViewModels
             _userService.Register(Login.Username, Login.SecurePassword);
         }
 
+        public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -14,6 +15,7 @@ namespace PasswordHoarder.ViewModels
     {
         public PasswordList PasswordList { get; set; }
         public ICommand RefreshCommand { get; set; }
+        public ICommand CopyCommand { get; set; }
         public ICommand DeleteEntryCommand { get; set; }
         public ICommand NavigateAddCommand { get; }
         public ICommand NavigateEditCommand { get; }
@@ -39,7 +41,7 @@ namespace PasswordHoarder.ViewModels
                 CanExecuteDelegate = _ => PasswordList.SelectedEntry != null
             };
 
-            var copyCommand = new GenericCommand<object>
+            CopyCommand = new GenericCommand<object>
             {
                 ExecuteDelegate = _ => Clipboard.SetText(PasswordList.SelectedEntry.Password)
             };
@@ -51,10 +53,33 @@ namespace PasswordHoarder.ViewModels
 
             Actions = new ObservableCollection<ContextAction>
             {
-                new ("Copy Password", copyCommand, @"/Resources/clipboard.png"),
+                new ("Copy Password", CopyCommand, @"/Resources/clipboard.png"),
                 new ("Show Password", showCommand, @"/Resources/clipboard.png")
+            };
+
+            MenuItems = new ObservableCollection<MenuItemViewModel>
+            {
+                new()
+                {
+                    Header = "Database",
+                    SubItems = new ObservableCollection<MenuItemViewModel>
+                    {
+                        new() { Header = "Add New Entry", Command = NavigateAddCommand },
+                        new() { Header = "Quit", Command = new GenericCommand<object> { ExecuteDelegate = _ => Application.Current.Shutdown()}},
+                    }
+                },
+                new()
+                {
+                    Header = "Help",
+                    SubItems = new ObservableCollection<MenuItemViewModel>
+                    {
+                        new() { Header = "User Guide", Command = new GenericCommand<object> { ExecuteDelegate = _ => Console.WriteLine("Guide")}},
+                        new() { Header = "About", Command = new GenericCommand<object> { ExecuteDelegate = _ => Console.WriteLine("About")}},
+                    }
+                }
             };
         }
 
+        public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }
     }
 }

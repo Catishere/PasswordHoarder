@@ -46,7 +46,9 @@ namespace PasswordHoarder.Models.UI
             set
             {
                 _selectedEntry = value;
+                _showPassword = false;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(ShowPassword));
                 OnPropertyChanged(nameof(EntryPasswordConceal));
             }
         }
