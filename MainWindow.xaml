@@ -39,6 +39,12 @@
                     <DataTemplate DataType="{x:Type viewmodels:GeneratePasswordViewModel}">
                         <views:GeneratePasswordView/>
                     </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:HelpViewModel}">
+                        <views:HelpView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:AboutViewModel}">
+                        <views:AboutView/>
+                    </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>

@@ -73,8 +73,8 @@ namespace PasswordHoarder.ViewModels
                     Header = "Help",
                     SubItems = new ObservableCollection<MenuItemViewModel>
                     {
-                        new() { Header = "User Guide", Command = new GenericCommand<object> { ExecuteDelegate = _ => Console.WriteLine("Guide")}},
-                        new() { Header = "About", Command = new GenericCommand<object> { ExecuteDelegate = _ => Console.WriteLine("About")}},
+                        new() { Header = "User Guide", Command = new NavigationCommand<HelpViewModel>(navigationStore)},
+                        new() { Header = "About", Command = new NavigationCommand<AboutViewModel>(navigationStore)}
                     }
                 }
             };
