@@ -24,51 +24,8 @@ namespace PasswordHoarder.ViewModels
         public MainViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
-            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged; 
-            MenuItems = new ObservableCollection<MenuItemViewModel>
-            {
-                new()
-                {
-                    Header = "Database",
-                    SubItems = new ObservableCollection<MenuItemViewModel>
-                    {
-                        new() { Header = "Import", Command = new GenericCommand<object> { ExecuteDelegate = _ =>
-                        {
-                            OpenFileDialog openFileDialog = new OpenFileDialog
-                            {
-                                Filter = "Keystore files (*.kdb)|*.kdb"
-                            };
-                            if (openFileDialog.ShowDialog() == true)
-                                FileUtils.Filename = openFileDialog.FileName;
-                        }}},
-                        new() { Header = "Export", Command = new GenericCommand<object> { ExecuteDelegate = _ =>
-                        {
-                            SaveFileDialog saveFileDialog = new SaveFileDialog
-                            {
-                                Filter = "Keystore files (*.kdb)|*.kdb"
-                            };
-                        }}},
-                        new() { Header = "Quit", Command = new GenericCommand<object> { ExecuteDelegate = _ => System.Windows.Application.Current.Shutdown()}}
-                    }
-                },
-                new()
-                {
-                    Header = "Tools",
-                    SubItems = new ObservableCollection<MenuItemViewModel>
-                    {
-                        new() { Header = "Password Generator", Command = new NavigationCommand<GeneratePasswordViewModel>(navigationStore)}
-                    }
-                },
-                new()
-                {
-                    Header = "Help",
-                    SubItems = new ObservableCollection<MenuItemViewModel>
-                    {
-                        new() { Header = "User Guide", Command = new NavigationCommand<HelpViewModel>(navigationStore)},
-                        new() { Header = "About", Command = new NavigationCommand<AboutViewModel>(navigationStore)}
-                    }
-                }
-            };
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+            MenuItems = CurrentViewModel.MenuItems;
         }
 
         public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }

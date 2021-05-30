@@ -69,7 +69,6 @@
             <Button Command="{Binding NavigateGeneratePasswordCommand}" Margin="0" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Image Source="/PasswordHoarder;component/Resources/dice.png" Margin="0,5"/>
             </Button>
-            <Button Content="Button" Margin="25,10" Grid.Column="5"/>
             <Button Command="{Binding NavigateAddCommand}" Grid.Column="0" x:Name="AddButton" Margin="0" FontSize="18" BorderBrush="{x:Null}" Background="{x:Null}">
                 <Image Source="/PasswordHoarder;component/Resources/add.png" Margin="0,5"/>
             </Button>

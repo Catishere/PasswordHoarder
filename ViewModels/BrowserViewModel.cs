@@ -77,6 +77,14 @@ namespace PasswordHoarder.ViewModels
                 },
                 new()
                 {
+                    Header = "Tools",
+                    SubItems = new ObservableCollection<MenuItemViewModel>
+                    {
+                        new() { Header = "Password Generator", Command = new NavigationCommand<GeneratePasswordViewModel>(navigationStore)}
+                    }
+                },
+                new()
+                {
                     Header = "Help",
                     SubItems = new ObservableCollection<MenuItemViewModel>
                     {

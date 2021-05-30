@@ -69,7 +69,15 @@ namespace PasswordHoarder.ViewModels
                                 Filter = "Keystore files (*.kdb)|*.kdb"
                             };
                         }}},
-                        new() { Header = "Quit", Command = new GenericCommand<object> { ExecuteDelegate = _ => System.Windows.Application.Current.Shutdown()}}
+                        new() { Header = "Quit", Command = new GenericCommand<object> { ExecuteDelegate = _ => Application.Current.Shutdown()}}
+                    }
+                },
+                new()
+                {
+                    Header = "Tools",
+                    SubItems = new ObservableCollection<MenuItemViewModel>
+                    {
+                        new() { Header = "Password Generator", Command = new NavigationCommand<GeneratePasswordViewModel>(navigationStore)}
                     }
                 },
                 new()
