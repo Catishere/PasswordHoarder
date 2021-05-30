@@ -47,7 +47,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox Style="{StaticResource PlaceHolder}" Tag="Search..." Text="{Binding PasswordList.Match, UpdateSourceTrigger=PropertyChanged}" Margin="5" TextWrapping="Wrap" VerticalContentAlignment="Center" FontSize="20" Padding="10,0,0,0" Grid.Row="1"/>
+        <TextBox Style="{StaticResource PlaceHolder}" Tag="Search..." Text="{Binding PasswordList.Match, UpdateSourceTrigger=PropertyChanged}" Margin="10, 5, 10, 5" TextWrapping="Wrap" VerticalContentAlignment="Center" FontSize="20" Padding="10,0,0,0" Grid.Row="1"/>
         <Grid Margin="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
