@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button Command="{Binding NavigateBackCommand}" Content="Back" HorizontalAlignment="Left" Margin="651,403,0,0" VerticalAlignment="Top" Width="139" Height="37"/>
+        <Button Command="{Binding NavigateBackCommand}" Content="Back" HorizontalAlignment="Right" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="139" Height="37"/>
         <Label Content="This app is made by Victor Gyoshev for University project.&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="45" Width="665" FontSize="22"/>
         <Label Content="Version:  " HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="51"/>
         <Label Content="{Binding Version}" HorizontalAlignment="Left" Margin="66,60,0,0" VerticalAlignment="Top" Width="51"/>

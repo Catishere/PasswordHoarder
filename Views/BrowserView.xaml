@@ -38,7 +38,7 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Exp." DisplayMemberBinding="{Binding ExpireDate}" Width="50" />
+                    <GridViewColumn Header="Exp." DisplayMemberBinding="{Binding ExpireDate, Converter={StaticResource IsExpiredConverter}}" Width="50" />
                     <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="150" />
                     <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Username}" Width="150" />
                     <GridViewColumn Header="URL" DisplayMemberBinding="{Binding Url}" Width="150" />

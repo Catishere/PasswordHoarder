@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using PasswordHoarder.Models.UI;
 using PasswordHoarder.Stores;
+using PasswordHoarder.Utils;
 using PasswordHoarder.ViewModels.Commands;
 
 namespace PasswordHoarder.ViewModels
@@ -65,6 +66,12 @@ namespace PasswordHoarder.ViewModels
                     SubItems = new ObservableCollection<MenuItemViewModel>
                     {
                         new() { Header = "Add New Entry", Command = NavigateAddCommand },
+                        new() { Header = "Log out", Command = new GenericCommand<object> {ExecuteDelegate = _ =>
+                        {
+                            UserMetaInfo.Username = null;
+                            UserMetaInfo.Password = null;
+                            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
+                        }} },
                         new() { Header = "Quit", Command = new GenericCommand<object> { ExecuteDelegate = _ => Application.Current.Shutdown()}},
                     }
                 },

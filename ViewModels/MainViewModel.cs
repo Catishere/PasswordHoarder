@@ -9,8 +9,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Win32;
 using PasswordHoarder.Annotations;
+using PasswordHoarder.Models.UI;
 using PasswordHoarder.Stores;
+using PasswordHoarder.Utils;
 using PasswordHoarder.ViewModels.Commands;
 
 namespace PasswordHoarder.ViewModels
@@ -29,9 +32,31 @@ namespace PasswordHoarder.ViewModels
                     Header = "Database",
                     SubItems = new ObservableCollection<MenuItemViewModel>
                     {
-                        new() { Header = "Import", Command = new GenericCommand<object> { ExecuteDelegate = _ => Console.WriteLine("Import")}},
-                        new() { Header = "Export", Command = new GenericCommand<object> { ExecuteDelegate = _ => Console.WriteLine("Export")}},
+                        new() { Header = "Import", Command = new GenericCommand<object> { ExecuteDelegate = _ =>
+                        {
+                            OpenFileDialog openFileDialog = new OpenFileDialog
+                            {
+                                Filter = "Keystore files (*.kdb)|*.kdb"
+                            };
+                            if (openFileDialog.ShowDialog() == true)
+                                FileUtils.Filename = openFileDialog.FileName;
+                        }}},
+                        new() { Header = "Export", Command = new GenericCommand<object> { ExecuteDelegate = _ =>
+                        {
+                            SaveFileDialog saveFileDialog = new SaveFileDialog
+                            {
+                                Filter = "Keystore files (*.kdb)|*.kdb"
+                            };
+                        }}},
                         new() { Header = "Quit", Command = new GenericCommand<object> { ExecuteDelegate = _ => System.Windows.Application.Current.Shutdown()}}
+                    }
+                },
+                new()
+                {
+                    Header = "Tools",
+                    SubItems = new ObservableCollection<MenuItemViewModel>
+                    {
+                        new() { Header = "Password Generator", Command = new NavigationCommand<GeneratePasswordViewModel>(navigationStore)}
                     }
                 },
                 new()
@@ -39,8 +64,8 @@ namespace PasswordHoarder.ViewModels
                     Header = "Help",
                     SubItems = new ObservableCollection<MenuItemViewModel>
                     {
-                        new() { Header = "User Guide", Command = new GenericCommand<object> { ExecuteDelegate = _ => Console.WriteLine("Guide")}},
-                        new() { Header = "About", Command = new GenericCommand<object> { ExecuteDelegate = _ => Console.WriteLine("About")}},
+                        new() { Header = "User Guide", Command = new NavigationCommand<HelpViewModel>(navigationStore)},
+                        new() { Header = "About", Command = new NavigationCommand<AboutViewModel>(navigationStore)}
                     }
                 }
             };

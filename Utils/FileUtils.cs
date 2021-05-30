@@ -10,7 +10,7 @@ namespace PasswordHoarder.Utils
 {
     public static class FileUtils
     {
-        private const string Filename = "keystore.dat";
+        public static string Filename { get; set; } = "keystore.dat";
         public static void StorePasswords(IEnumerable<IPasswordEntry> passwords)
         {
             PasswordFileModel pfm = new PasswordFileModel();

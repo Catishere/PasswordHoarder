@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using PasswordHoarder.Models.UI;
 using PasswordHoarder.Stores;
+using PasswordHoarder.Utils;
 using PasswordHoarder.ViewModels.Commands;
 
 namespace PasswordHoarder.ViewModels
@@ -27,7 +28,9 @@ namespace PasswordHoarder.ViewModels
                 ExecuteDelegate = _ => Clipboard.SetText(PasswordGenerator.Password)
             };
             PasswordGenerator = new PasswordGenerator();
-            NavigateBackCommand = new NavigationCommand<BrowserViewModel>(navigationStore);
+            NavigateBackCommand = UserMetaInfo.Username == null ?
+                new NavigationCommand<LoginViewModel>(navigationStore) :
+                new NavigationCommand<BrowserViewModel>(navigationStore);
         }
 
         public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }
