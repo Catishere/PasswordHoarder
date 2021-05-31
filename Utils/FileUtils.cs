@@ -24,6 +24,7 @@ namespace PasswordHoarder.Utils
             if (!File.Exists(Filename)) yield break;
             var password = PasswordUtils.SecureStringToString(UserMetaInfo.Password);
             var fileData = File.ReadAllText(Filename);
+            if (fileData.Equals(string.Empty)) yield break;
             var text = Cryptography.Decrypt(fileData, password);
             var pfm = JsonSerializer.Deserialize<PasswordFileModel>(text);
 

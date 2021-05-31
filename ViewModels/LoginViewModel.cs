@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Security;
 using System.Text;
@@ -66,6 +67,8 @@ namespace PasswordHoarder.ViewModels
                             {
                                 Filter = "Keystore files (*.kdb)|*.kdb"
                             };
+                            if (saveFileDialog.ShowDialog() == true)
+                                File.Copy(FileUtils.Filename, saveFileDialog.FileName);
                         }}},
                         new() { Header = "Quit", Command = new GenericCommand<object> { ExecuteDelegate = _ => Application.Current.Shutdown()}}
                     }
