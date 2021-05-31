@@ -22,7 +22,6 @@ namespace PasswordHoarder.ViewModels
     class LoginViewModel : IViewModel
     {
         private readonly UserService _userService;
-        private readonly IRepository<User> _userRepository;
         private NavigationStore _navigationStore;
         public ICommand LoginCommand { get; private set; }
         public ICommand RegisterCommand { get; private set; }
@@ -40,8 +39,7 @@ namespace PasswordHoarder.ViewModels
         public LoginViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
-            _userRepository = new UserRepository(new UserContext());
-            _userService = new UserService(_userRepository);
+            _userService = new UserService(new UserContext());
             Login = new Login();
             LoginCommand = new LoginCommand(this);
             RegisterCommand = new RegisterCommand(this);

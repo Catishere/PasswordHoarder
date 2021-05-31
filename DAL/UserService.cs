@@ -13,24 +13,24 @@ namespace PasswordHoarder.DAL
 {
     class UserService
     {
-        private readonly IRepository<User> _userRepository;
-        public UserContext UserContext { get; set; }
+        private readonly UserContext _userContext;
 
-        public UserService(IRepository<User> userRepository)
+        public UserService(UserContext userContext)
         {
-            _userRepository = userRepository;
+            _userContext = userContext;
         }
+
         public bool Login(string username, SecureString password)
         {
-            var users = _userRepository.Get(x => x.Username == username);
+            var users = _userContext.Users.Where(x => x.Username == username).ToList();
             var user = users.Any() ? users.First() : null;
             return user != null && user.Password.Equals(Cryptography.EncodePassword(password));
         }
 
         public void Register(string loginUsername, SecureString loginSecurePassword)
         {
-            _userRepository.Insert(new User(loginUsername, loginUsername, Cryptography.EncodePassword(loginSecurePassword)));
-            _userRepository.Save();
+            _userContext.Users.Add(new User(loginUsername, loginUsername, Cryptography.EncodePassword(loginSecurePassword)));
+            _userContext.SaveChanges();
         }
     }
 }
