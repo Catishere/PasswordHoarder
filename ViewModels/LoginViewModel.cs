@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Security;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -60,6 +62,7 @@ namespace PasswordHoarder.ViewModels
                             };
                             if (openFileDialog.ShowDialog() == true)
                                 FileUtils.Filename = openFileDialog.FileName;
+                            Login.UpdateFilename();
                         }}},
                         new() { Header = "Export", Command = new GenericCommand<object> { ExecuteDelegate = _ =>
                         {
@@ -100,6 +103,19 @@ namespace PasswordHoarder.ViewModels
             if (log)
             {
                 UserMetaInfo.Username = Login.Username;
+                UserMetaInfo.Password = Login.SecurePassword;
+                try
+                {
+                    var pfm = FileUtils.GetPasswordFileModel();
+                }
+                catch (JsonException)
+                {
+                    MessageBox.Show("Database failed to decrypt with this password!",
+                        "Decryption failed!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    return;
+                }
                 _navigationStore.CurrentViewModel = new BrowserViewModel(_navigationStore);
             }
             else

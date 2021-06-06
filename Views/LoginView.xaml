@@ -31,5 +31,6 @@
         <Button x:Name="RegisterButton" Command="{Binding RegisterCommand}" Content="Register" Grid.Column="1" Margin="10,5" Grid.Row="4" MinWidth="40" MinHeight="40"/>
         <Label Content="PassHoarder" Margin="50,0,0,0" Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0"
                VerticalContentAlignment="Center" FontSize="36"/>
+        <TextBlock Text="{Binding Login.DbFileName}" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" Height="115"/>
     </Grid>
 </UserControl>

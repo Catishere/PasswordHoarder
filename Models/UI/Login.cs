@@ -1,13 +1,16 @@
 ﻿using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security;
 using PasswordHoarder.Annotations;
+using PasswordHoarder.Utils;
 
 namespace PasswordHoarder.Models.UI
 {
     public class Login : INotifyPropertyChanged
     {
         private string _username;
+        private string _dbFileName;
 
         public Login(string username, SecureString password)
         {
@@ -15,7 +18,15 @@ namespace PasswordHoarder.Models.UI
             SecurePassword = password;
         }
 
-        public Login() { }
+        public Login()
+        {
+            UpdateFilename();
+        }
+
+        public void UpdateFilename()
+        {
+            DbFileName = "Current database:\n" + FileUtils.Filename;
+        }
 
         public string Username
         {
@@ -23,6 +34,16 @@ namespace PasswordHoarder.Models.UI
             set
             {
                 _username = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string DbFileName
+        {
+            get => _dbFileName;
+            set
+            {
+                _dbFileName = value;
                 OnPropertyChanged();
             }
         }

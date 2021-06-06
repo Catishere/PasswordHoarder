@@ -9,6 +9,7 @@ using PasswordHoarder.Models.UI;
 using PasswordHoarder.Stores;
 using PasswordHoarder.Utils;
 using PasswordHoarder.ViewModels.Commands;
+using PasswordHoarder.Views;
 
 namespace PasswordHoarder.ViewModels
 {

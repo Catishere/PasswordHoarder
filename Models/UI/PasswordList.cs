@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Windows;
 using PasswordHoarder.Annotations;
 using PasswordHoarder.Utils;
 
@@ -13,6 +15,7 @@ namespace PasswordHoarder.Models.UI
         private string _match = "";
         private IPasswordEntry _selectedEntry;
         private bool _showPassword;
+        public bool HasError = false;
 
         public PasswordList()
         {
@@ -75,7 +78,15 @@ namespace PasswordHoarder.Models.UI
         public void Refresh()
         {
             Passwords = new List<IPasswordEntry>();
-            Passwords.AddRange(FileUtils.GetPasswords());
+            try
+            {
+                Passwords.AddRange(FileUtils.GetPasswords());
+            }
+            catch (JsonException)
+            {
+                HasError = true;
+            }
+
             Passwords.Sort();
             DisplayedPasswords = Passwords;
             OnPropertyChanged(nameof(DisplayedPasswords));

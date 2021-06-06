@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Windows;
 using PasswordHoarder.Models;
 using PasswordHoarder.Models.UI;
 
@@ -21,16 +21,20 @@ namespace PasswordHoarder.Utils
 
         public static IEnumerable<IPasswordEntry> GetPasswords()
         {
-            if (!File.Exists(Filename)) yield break;
-            var password = PasswordUtils.SecureStringToString(UserMetaInfo.Password);
-            var fileData = File.ReadAllText(Filename);
-            if (fileData.Equals(string.Empty)) yield break;
-            var text = Cryptography.Decrypt(fileData, password);
-            var pfm = JsonSerializer.Deserialize<PasswordFileModel>(text);
-
+            var pfm = GetPasswordFileModel();
             if (pfm == null) yield break;
             foreach (var entry in pfm.Entries)
                 yield return entry;
+        }
+
+        public static PasswordFileModel GetPasswordFileModel()
+        {
+            if (!File.Exists(Filename)) return null;
+            var password = PasswordUtils.SecureStringToString(UserMetaInfo.Password);
+            var fileData = File.ReadAllText(Filename);
+            if (fileData.Equals(string.Empty)) return null;
+            var text = Cryptography.Decrypt(fileData, password);
+            return JsonSerializer.Deserialize<PasswordFileModel>(text);
         }
     }
 }
